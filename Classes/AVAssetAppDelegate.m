@@ -31,10 +31,13 @@
 	for (MPMediaItem *song in itemsFromGenericQuery) {
 		NSString *songTitle = [song valueForProperty: MPMediaItemPropertyTitle];
 		NSURL *songURL = [song valueForProperty:MPMediaItemPropertyAssetURL];
-		NSLog (@"%@, %@", songTitle, songURL);
+		NSLog(@"Title: %@", songTitle);
+		NSLog(@"URL: %@",   songURL);
 		
 		AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:songURL error:nil];
 		[player play];
+		
+		NSLog(@"Length: %i", [[[NSFileManager defaultManager] contentsAtPath:[songURL path]] length]);
 		
 		break;
 	}
