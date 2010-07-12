@@ -9,6 +9,7 @@
 #import "AVAssetAppDelegate.h"
 #import "RootViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import <AVFoundation/AVFoundation.h>
 
 
 @implementation AVAssetAppDelegate
@@ -29,8 +30,12 @@
 	NSArray *itemsFromGenericQuery = [everything items];
 	for (MPMediaItem *song in itemsFromGenericQuery) {
 		NSString *songTitle = [song valueForProperty: MPMediaItemPropertyTitle];
-		NSString *songURL = [song valueForProperty:MPMediaItemPropertyAssetURL];
+		NSURL *songURL = [song valueForProperty:MPMediaItemPropertyAssetURL];
 		NSLog (@"%@, %@", songTitle, songURL);
+		
+		AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:songURL error:nil];
+		[player play];
+		
 		break;
 	}
 	
